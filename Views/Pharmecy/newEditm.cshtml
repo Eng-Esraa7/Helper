@@ -1,0 +1,50 @@
+﻿@model Helper.Models.newModelMedicine
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<section class="add">
+    <h2 class="margin btnstyle formAdd">Edit Medicine</h2>
+    @Html.ValidationSummary(true, "Please Fix The Following Erorrs.", new { @class = "center" })
+    @using (Html.BeginForm("SaveEditm", "Pharmecy"))
+    {
+        <div class="form-group">
+            <label for="Name">Name</label>
+            @Html.TextBoxFor(c => c.medicines.name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.medicines.name)
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Price Of Medicine</label>
+            @Html.TextBoxFor(c => c.medicines.price, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.medicines.price)
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Number Of Pieces</label>
+            @Html.TextBoxFor(c => c.medicines.NoOfPiece, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.medicines.NoOfPiece)
+        </div>
+
+        @*<div class="form-group">
+                <label for="pharmecyId">Pharmecy Name</label>
+                @Html.DropDownListFor(c => c.medicines.pharmecyId, new SelectList(Model.pharmecy, "id", "Name"), "Select Pharmecy Name", new { @class = "form-control" })
+            </div>*@
+        @Html.HiddenFor(m => m.medicines.id);
+        <div>
+            @foreach (var ph in Model.pharmecy)
+            {
+                if (User.Identity.GetUserName().Equals(ph.Email))
+                {
+                    Model.medicines.pharmecyId = ph.id;
+                    @Html.HiddenFor(m => m.medicines.pharmecyId);
+                }
+
+            }
+            <button type="submit" class="btn">Add</button>
+            | @Html.ActionLink("Back", "Choose", "Pharmecy", new { id = Model.medicines.pharmecyId }, new { @class = "btn" })
+        </div>
+    }
+</section>

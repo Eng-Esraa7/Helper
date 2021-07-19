@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Helper.Models.Medicines>
+@using Microsoft.AspNet.Identity
+@{
+ViewBag.Title = "Medicines";
+}
+<style>
+    input[type="number"]{
+        width:100px
+    }
+</style>
+<section class="doners">
+<div class="container">
+@foreach (var m in ViewBag.list)
+{
+if (m.id == ViewBag.Id)
+{
+    <h1>Hello In @m.Name Pharmecy</h1>
+}
+}
+<div class="left">
+@*Add*@
+@if (User.Identity.GetUserName().Length > 0)
+{
+    foreach (var m in ViewBag.list)
+    {
+        if (m.id == ViewBag.Id && m.Email == User.Identity.GetUserName())
+        {
+            @Html.ActionLink("Add Medicine", "Newm", "Pharmecy",new { idpharmecy = ViewBag.Id }, new { @class = "btn btn-warning btnstyle" })
+            @Html.ActionLink("Show Requests", "Request", "Pharmecy",new { idpharmecy = ViewBag.Id }, new { @class = "btn btn-warning btnstyle", style = "margin-left:20px"})
+        }
+    }
+}
+else
+{
+    <a href="/Account/Login" class="btn btnstyle">Add Medicine</a>
+}
+</div>
+
+<div class="search right">
+@using (Html.BeginForm("Choose", "Pharmecy", FormMethod.Get, new { id = ViewBag.Id }))
+{
+    <i class="fas fa-search"></i>
+    @Html.TextBox("searching")<input type="submit" value="Search" class="btn" />
+}
+</div>
+@if (Model.Count() == 0)
+{
+<p class="NotFound"> No Match Found!</p>
+}
+else
+{
+<table class="table tab-content table-bordered table-hover table-responsive">
+    <thead>
+        <tr>
+
+            <th>Name Of Medicines</th>
+            <th>Price</th>
+            @foreach (var m in ViewBag.list)
+            {
+                if (m.id == ViewBag.Id && m.Email == User.Identity.GetUserName())
+                {
+                    <th>Edit</th>
+                    <th>Delete</th>
+                }
+            }
+            <th>Add To Cart</th>
+            @*<th>is it Added before in cart?</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            if (d.NoOfPiece > 0)
+            {
+        <tr>
+            <td>@d.name</td>
+            <td>@d.price</td>
+            @foreach (var m in ViewBag.list)
+            {
+                if (m.id == ViewBag.Id && m.Email == User.Identity.GetUserName())
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Editm", "Pharmecy", new { id = d.id }, new { @class = "btn btn-warning margin-right" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Deletem", "Pharmecy", new { id = d.id, idPharmecy = ViewBag.Id }, new { @class = "btn btn-warning" })
+                    </td>
+
+                }
+            }
+        <td>
+            @using (Html.BeginForm("addToCart", "Pharmecy", new { id = d.id, idPharmecy = ViewBag.Id }))
+                {
+            <div class="form-group">
+                @*@Html.EditorFor(x => d.noOfCategory)*@
+                @*@Html.TextBoxFor(c => d.noOfCategory, new { @class = "form-control" })*@
+                <button type="submit" class="btn">Add To Cart</button>
+                @*@Html.ActionLink("Add To Cart", }, new { @class = "btn margin-right addCart", type = "Submit" })*@
+            </div>
+                    }
+            @*<input type="number" class="num" name="num" min="1" max=@d.NoOfPiece step="1" value="1" style="margin-right:30px">*@
+        @*</td>*@
+                @*@foreach (var c in ViewBag.cart)
+                {
+                    if (c.UserId == User.Identity.GetUserId() && c.name == d.name && c.price == d.price && c.medId == d.id && c.check == false)
+                    {
+                    <td>
+                        <h2>Yes</h2>
+                    </td>
+                        break;
+                    }
+                }*@
+            </tr>
+            }
+        }
+    </tbody>
+</table>
+}
+@Html.ActionLink("Back", "pharmecy", "Pharmecy", new { id = ViewBag.Id }, new { @Class = "btn" })
+
+</div>
+</section>
+

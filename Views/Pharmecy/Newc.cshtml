@@ -1,0 +1,39 @@
+﻿@model Helper.Models.newModelMedicine
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+    <section class="add">
+        <h2 class="margin btnstyle formAdd">Check Out</h2>
+        @Html.ValidationSummary(true, "Please Fix The Following Erorrs.", new { @class = "center" })
+        @using (Html.BeginForm("Savec", "Pharmecy"))
+        {
+            <div class="form-group">
+                <label for="FullName">Full Name</label>
+                @Html.TextBoxFor(c => c.checkOut.FullName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.checkOut.FullName)
+            </div>
+            <div class="form-group">
+                <label for="Address">Address</label>
+                @Html.TextBoxFor(c => c.checkOut.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.checkOut.Address)
+            </div>
+
+            <div class="form-group">
+                <label for="Phone">Phone Number</label>
+                @Html.TextBoxFor(c => c.checkOut.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.checkOut.Phone)
+            </div>
+
+            <h2>We Will Contact You Soon</h2>
+
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.checkOut.id)
+            @Html.HiddenFor(m => m.checkOut.Total)
+            @Html.HiddenFor(m => m.checkOut.UserId)
+            <button type="submit" class="btn">Submit</button>
+            @Html.ActionLink("Back", "addToCart", "Pharmecy", new { @class = "btn" })
+        }
+    </section>

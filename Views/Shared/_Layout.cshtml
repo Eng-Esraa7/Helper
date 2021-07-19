@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title-Covide19</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/css/hover.css" rel="stylesheet" />
+    <link href="~/css/Home.css" rel="stylesheet" />
+    <link href="~/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/css/Covide.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital@0;1&family=Roboto+Slab&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--start navbar-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!--button appear in phone-->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#opennavbar" aria-expanded="false">
+                    <!--target بيقول لما ادوس عليه يفتح اي-->
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand hvr-wobble-top" href="#" style="margin-left:-45px">Helper</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="opennavbar">
+                <img class="img" src="https://www.statelineheart.com/assets/images/statelineheart/statelineheart_consultive_mobile.jpg">
+                <ul class="nav navbar-nav navbar-left" style="margin-left:90px">
+                    <li class="hvr-bounce-in"><a href="/home/index" class="activelink">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="hvr-bounce-in"><a href="/Doners/Doners">Donors</a></li>
+                    <li class="hvr-bounce-in"><a href="/pharmecy/pharmecy">Order your medication</a></li>
+                    <li class="hvr-bounce-in"><a href="/Home/instruction">instructions</a></li>
+                    <li class="hvr-bounce-in"><a href="/Home/CommonQ"><i class="far fa-question-circle"></i></a></li>
+                    @if (User.Identity.GetUserName().Length > 0)
+                    {
+                        <li class="hvr-bounce-in"><a href="/ContactUs/Create">Contact Us</a></li>
+                    }
+                    else
+                    {
+                        <li class="hvr-bounce-in"><a href="/account/login">Contact Us</a></li>
+                    }
+                    @if (User.Identity.GetUserName().Length > 0)
+                    {
+                        <li class="hvr-bounce-in"><a href="/Pharmecy/addToCart"><i class="fa fa-shopping-cart"></i></a></li>
+                    }
+                    @if (User.Identity.GetUserName().Equals("Admin@gmail") && User.Identity.GetUserId().Equals("152c6af5-3dfe-4056-916e-1184b9945461"))
+                    {
+                        <li class="hvr-bounce-in"><a href="/ContactUs/Index"><i class="far fa-bell"></i></a></li>
+                    }
+                    @if (User.Identity.GetUserName().Length > 0 && User.Identity.GetUserName() != "Admin@gmail" && User.Identity.GetUserId() != "152c6af5-3dfe-4056-916e-1184b9945461")
+                    {
+                        <li class="hvr-bounce-in"><a href="/Submit/Notification"><i class="fa fa-mail-bulk"></i></a></li>
+                    }
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!--End of container-->
+
+    </nav>
+    <!--end navbar-->
+
+    @RenderBody()
+    <section class="copy text-center">
+        <span>Copyright &copy;</span> <p style="font-size: 30px; display: inline;">2021</p> <span>Covide19 ,</span> <p style="font-size: 30px; display: inline;">Ghosts Team</p>
+        <span>. All Rights Reserved</span>
+    </section>
+    <!-- start scroll top -->
+    <div id="scroll-top">
+        <i class="fa fa-chevron-up fa-3x"></i>
+    </div>
+    <!-- End scroll top -->
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    <script src="~/js/jquery-1.11.1.min.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/jquery.nicescroll.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

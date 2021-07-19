@@ -1,0 +1,57 @@
+﻿@model Helper.Models.newModelMedicine
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <section class="add doners">
+        <div class="container">
+        <h2 class="margin btnstyle formAdd">Request</h2>
+<table class="table tab-content table-bordered table-hover table-responsive">
+        <thead>
+            <tr>
+                <td>Medicine Name</td>
+                <td>Medicine Price</td>
+                <td>Name Of Order User</td>
+                <td>Address Of Order User</td>
+                <td>Phone Of Order User</td>
+                <td>Finish Order</td>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var m in ViewBag.medicine)
+        {
+            if (ViewBag.Idpharmecy == m.pharmecyId)
+            {
+                foreach (var cart in ViewBag.cart)
+                {
+                if (cart.medId == m.id)
+                {
+                foreach (var check in ViewBag.checkout)
+                {
+                    if (check.UserId == cart.UserId)
+                    {
+
+            <tr>
+                <td>@m.name</td>
+                <td>@m.price</td>
+                <td>@check.FullName</td>
+                <td>@check.Address</td>
+                <td>@check.Phone</td>
+                <td>@Html.ActionLink("Finish Order", "finishOrder", "Pharmecy", new { id = cart.id, idPharmecy = ViewBag.Idpharmecy }, new { @class = "btn margin-right" })</td>
+            </tr>
+                                break;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+</tbody>
+</table>
+                @Html.ActionLink("Back", "Choose", "Pharmecy", new { id = ViewBag.Idpharmecy }, new { @Class = "btn" })
+
+</div>
+    </section>

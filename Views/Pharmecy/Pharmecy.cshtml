@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Helper.Models.Pharmecy>
+@using Microsoft.AspNet.Identity
+@using Helper.Models
+@{
+    ViewBag.Title = "Pharmecy";
+}
+<section class="doners">
+    <div class="container">
+        <h1>Pharmecy</h1>
+        @*Add*@
+        @if (User.Identity.GetUserName().Length > 0)
+        {
+            @Html.ActionLink("Add", "NewPh", "Pharmecy", new { @class = "btn btn-warning btnstyle" })
+        }
+        else
+        {
+            <a href="/Account/Login" class="btn btnstyle">Add</a>
+        }
+
+        @*Edit*@
+        @if (User.Identity.GetUserName().Length > 0)
+        {
+            foreach (var email in Model)
+            {
+                if (email.Email == (User.Identity.GetUserName()))
+                {
+                    @Html.ActionLink("Edit", "Editph", "Pharmecy", new { id = email.id }, new { @class = "btn btn-warning btnstyle" })
+                }
+            }
+        }
+
+        @*delete*@
+        @if (User.Identity.GetUserName().Length > 0)
+        {
+            foreach (var email in Model)
+            {
+                if (email.Email == (User.Identity.GetUserName()))
+                {
+                    @Html.ActionLink("Delete", "Deleteph", "Pharmecy", new { id = email.id }, new { @class = "btn btn-warning btnstyle" })
+                }
+            }
+        }
+       
+        <table class="table tab-content table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+
+                    <th>Name Of Pharmecy</th>
+                    <th>Location</th>
+                    <th>Choose Your Medicine</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    <tr>
+                        <td>@d.Name</td>
+                        <td>@d.Location</td>
+                        <td>
+                            @if (User.Identity.GetUserName().Length > 0)
+                            {
+                                @Html.ActionLink("Choose", "Choose", "Pharmecy", new { id = d.id }, new { @class = "btn btn-warning" })
+                            }
+                            else
+                            {
+                                <a href="/Account/Login" class="btn btn-warning">Choose</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+

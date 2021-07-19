@@ -1,0 +1,65 @@
+﻿@model Helper.Models.Doners
+
+@{
+    ViewBag.Title = "Done";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="add">
+<h2 class="center">Done</h2>
+
+<h3 class="center">Are you sure you want to Done this?Nunmber Of Oxygen Pipes Will Be Decreament</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoOfOxgen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoOfOxgen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Done" class="btn btn-default" /> |
+            <a href="/Submit/Notification" class="btn">Back</a>
+        </div>
+    }
+</div>
+</section>

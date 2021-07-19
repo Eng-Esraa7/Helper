@@ -1,0 +1,44 @@
+﻿@model Helper.Models.newDonors
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Notification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="doners">
+    <div class="container">
+        <h2 class="margin btnstyle formAdd" >User Submit</h2>
+        @foreach (var doners in ViewBag.Doners)
+        {
+            if (User.Identity.GetUserName().Equals(doners.Email))
+            {
+                <table class="table tab-content table-bordered table-hover table-responsive">
+                    <thead>
+                        <tr>
+
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Done</th>
+                        </tr>
+                    </thead>
+                    @foreach (var s in ViewBag.Submit)
+                    {
+                        if (doners.id == s.DonersId)
+                        {
+                            <tbody>
+                                <tr>
+                                    @if (s.done == false)
+                                    {
+                                        <td>@s.name</td>
+                                        <td>@s.Phone</td>
+                                        <td>@Html.ActionLink("Done", "Done", "Doners", new { id = doners.id, submitId = s.id }, new { @class = "btn btn-warning btnstyle" })</td>
+                                    }
+                                </tr>
+                            </tbody>
+                        }
+                    }
+                </table>
+            }
+        }
+    </div>
+</section>

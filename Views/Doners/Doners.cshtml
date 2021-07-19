@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Helper.Models.Doners>
+@using Microsoft.AspNet.Identity
+@using Helper.Models
+@{
+    ViewBag.Title = "Doners";
+}
+<section class="doners">
+    <div class="container">
+        <h1>Donors</h1>
+        @*Add*@
+        @if (User.Identity.GetUserName().Length > 0)
+        {
+            @Html.ActionLink("Add", "New", "Doners", new { @class = "btn btn-warning btnstyle" })
+        }
+        else
+        {
+            <a href="/Account/Login" class="btn btnstyle">Add</a>
+        }
+
+        @*Edit*@
+        @if (User.Identity.GetUserName().Length > 0)
+        {
+            foreach (var email in Model)
+            {
+                if (email.Email == (User.Identity.GetUserName()) && email.NoOfOxgen != 111111)
+                {
+                    @Html.ActionLink("Edit", "Edit", "Doners", new { id = email.id }, new { @class = "btn btn-warning btnstyle" })
+                }
+            }
+        }
+
+        @*delete*@
+        @if (User.Identity.GetUserName().Length > 0)
+        {
+            foreach (var email in Model)
+            {
+                if (email.Email == (User.Identity.GetUserName()) && email.NoOfOxgen != 111111)
+                {
+                    @Html.ActionLink("Delete", "Delete", "Doners", new { id = email.id }, new { @class = "btn btn-warning btnstyle" })
+                }
+            }
+        }
+        <table class="table tab-content table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th>No Of Oxygen Pipes</th>
+                    <th>Location</th>
+                    <th>Submit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    if (d.NoOfOxgen != 111111)
+                    {
+                        <tr>
+                            <td>@d.Name</td>
+                            <td>@d.NoOfOxgen</td>
+                            <td>@d.Location</td>
+                            <td>
+                                @if (User.Identity.GetUserName().Length > 0)
+                                {
+                                    <a href="/Submit/Create" class="btn">Submit</a>
+                                }
+                                else
+                                {
+                                    <a href="/Account/Login" class="btn btn-warning">Submit</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+

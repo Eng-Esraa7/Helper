@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Helper.Models.AddtoCart>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "addToCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="doners">
+    <div class="container">
+        <h2>In Your Cart</h2>
+        <h2>Total you Should Pay: @ViewBag.total$</h2>
+        @Html.ActionLink("Check Out", "Newc", "Pharmecy", new { total = @ViewBag.total}, new { @class = "btn margin-right", style="margin-bottom:30px" })
+        <table class="table tab-content table-bordered table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>Name Of Medicines</th>
+                    <th>Price</th>
+                    @*<th>No of Category</th>*@
+                    <th>Delete From cart</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    if (d.UserId == User.Identity.GetUserId() && d.check==false)
+                    {
+                <tr>
+                    <td>@d.name</td>
+                    <td>@d.price</td>
+                    @*<td>@d.noCategory</td>*@
+                    <td>@Html.ActionLink("Delete", "Deletec", "Pharmecy", new { id = d.id, idPharmecy = ViewBag.Id }, new { @class = "btn margin-right" })</td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        @if (ViewBag.Id != null)
+        {
+            @Html.ActionLink("Back", "Choose", "Pharmecy", new { id = ViewBag.Id }, new { @Class = "btn" })
+        }
+
+    </div>
+</section>
+
