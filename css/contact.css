@@ -1,0 +1,127 @@
+.contact {
+	padding-bottom: 80px;
+	width: 500px;
+	margin: 85px auto 0;
+}
+.contact h1
+{
+	text-align:center;
+	font-size:40px;
+	font-weight:bold;
+}
+.contact input ,textarea ,.btn
+{
+	
+	display:block;
+	margin:30px 0px;
+	padding:5px;
+	outline:none;
+	border-radius:20px;
+	border-color:#e6e6e6;
+	transform:translateX(-50%);
+	margin-left:50%
+}
+.contact input
+{
+	height:50px;
+}
+.contact input ,textarea 
+{
+	width:400px;
+}
+.contact textarea
+{
+	height:150px;
+	border: 1.5px solid #999b84;
+}
+.contact .btn 
+{
+	width:150px;
+	margin: 10px auto;
+	text-align:center;
+	font-weight:bold;
+	font-size:20px;
+	text-decoration:none;
+	color:#999b84;
+    transform:translateX(-50%);
+	margin-left:50%
+}
+
+
+.contact .btn:hover 
+{
+	width:150px;
+	margin: 10px auto;
+	text-align:center;
+	background-color:#a8dda8;
+	font-weight:bold;
+	font-size:20px;
+	color:#295939;
+	transform:translateX(-50%);
+	margin-left:50%
+}
+
+.field-validation-error, .validation-summary-errors, .input-validation-error {
+}
+/*success message*/
+.first_message {
+	margin: 70px;
+	font-size: 40px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	height: 50px;
+	width: 100px;
+	padding:50px;
+	margin-top:50px
+}
+
+.message {
+	background-color: #ccf6c8;
+	width: 700px;
+	height: 50px;
+	padding: 15px;
+	margin-left: 70px;
+	color: #295939;
+	font-weight: bold;
+	border-radius: 5px;
+	margin-bottom:360px
+}
+
+.last_message {
+	margin: 20px 70px 331px;
+	font-weight: bold;
+}
+
+.common details p, .common ul li, .common h4{
+	font-size:25px;
+	width:70%;
+	margin-left:15%;
+}
+.common h1 {
+	text-align: center;
+	margin-bottom: 40px;
+	font-weight: bold;
+	font-size: 40px;
+	color: /*#889e81;*/ #1f6650;
+}
+
+.common summary {
+	font-size: 23px;
+	font-weight: 300;
+	text-align: justify;
+	background-color: #000;
+	margin-bottom: 20px;
+	padding: 15px;
+	border-radius: 7px;
+	outline: none;
+	color: #9dab86;
+	opacity: 0.9;
+	width: 70%;
+	margin-left: 15%;
+}
+.common details h4 {
+	font-size: 25px;
+	font-weight: 300;
+	color: #000;
+	text-align: left;
+}
